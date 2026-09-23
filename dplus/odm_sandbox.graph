@@ -1,0 +1,57 @@
+{
+  "schema_version": "dplus_knowledge_graph_v1",
+  "organ": "OdMSandboxConstitution",
+  "nodes": [
+    {
+      "id": "organ::OdMSandboxConstitution",
+      "node_type": "Organ",
+      "label": "OdMSandboxConstitution"
+    },
+    {
+      "id": "signal::OdMSandboxConstitution::EvaluationRequest",
+      "node_type": "Signal",
+      "label": "EvaluationRequest",
+      "parent": "organ::OdMSandboxConstitution"
+    },
+    {
+      "id": "signal::OdMSandboxConstitution::ConstitutionalVerdict",
+      "node_type": "Signal",
+      "label": "ConstitutionalVerdict",
+      "parent": "organ::OdMSandboxConstitution"
+    },
+    {
+      "id": "cell::OdMSandboxConstitution::supreme_judge",
+      "node_type": "Cell",
+      "label": "supreme_judge",
+      "parent": "organ::OdMSandboxConstitution"
+    },
+    {
+      "id": "receptor::OdMSandboxConstitution::supreme_judge::on_evaluate",
+      "node_type": "Receptor",
+      "label": "on_evaluate",
+      "parent": "cell::OdMSandboxConstitution::supreme_judge"
+    }
+  ],
+  "edges": [
+    {
+      "from": "organ::OdMSandboxConstitution",
+      "to": "signal::OdMSandboxConstitution::EvaluationRequest",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMSandboxConstitution",
+      "to": "signal::OdMSandboxConstitution::ConstitutionalVerdict",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMSandboxConstitution",
+      "to": "cell::OdMSandboxConstitution::supreme_judge",
+      "relation": "CONTAINS_CELL"
+    },
+    {
+      "from": "cell::OdMSandboxConstitution::supreme_judge",
+      "to": "receptor::OdMSandboxConstitution::supreme_judge::on_evaluate",
+      "relation": "DECLARES_RECEPTOR"
+    }
+  ]
+}

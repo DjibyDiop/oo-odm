@@ -1,0 +1,53 @@
+// =============================================================================
+// OO-ODM: Organique des Matières — Champ des Possibilités (odm_possibilities.plus)
+// Suivi de l'espace des trajectoires et des états d'émergence
+// =============================================================================
+
+organ OdMPossibilityFieldOrgan {
+
+    signal TrajectoryRecordedSignal {
+        trajectory_id: u32,
+        terminal_nodes: u32,
+        has_singularity: bool,
+    }
+
+    signal FieldExpansionSignal {
+        discovered_states: u32,
+        unexplored_ratio: u32,
+    }
+
+    tissue ExplorationFieldTissue {
+
+        genome FieldTrackerCell {
+            atp_budget: 2000,
+            hormone_affinity: Adrenaline,
+
+            state {
+                total_trajectories: u32 = 0,
+                emergence_count: u32 = 0,
+                is_saturated: bool = false,
+            }
+
+            receptor on_trajectory(sig: TrajectoryRecordedSignal) {
+                self.state.total_trajectories += 1;
+                
+                if (sig.has_singularity) {
+                    self.state.emergence_count += 1;
+                    emit Blood::log("Champ des Possibilités: Nouvelle singularité découverte et intégrée.");
+                }
+
+                if (self.state.total_trajectories > 100) {
+                    self.state.is_saturated = true;
+                    emit ExplorationFieldTissue::broadcast(FieldExpansionSignal {
+                        discovered_states: self.state.total_trajectories,
+                        unexplored_ratio: 10,
+                    });
+                }
+
+                atp_yield;
+            }
+        }
+
+        cell field_observer = spawn FieldTrackerCell();
+    }
+}

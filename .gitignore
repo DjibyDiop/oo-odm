@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+*.whl
+
+# Rust build artifacts (IMPORTANT : ne pas committer target/)
+omx/oir-rust/target/
+target/
+
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+*.whl
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+.env
+
+# D+ compilés (les .dbc/.graph sont commitables — produits de dpc.exe)
+# On garde les .dbc et .graph dans le repo (artefacts de compilation importants)
+
+# Binaires natifs (fournis par OO, ne pas versionner ici)
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Caches et temporaires
+.pytest_cache/
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+*.vs/
+
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Coverage
+.coverage
+htmlcov/
+coverage.xml
+
+# MyPy
+.mypy_cache/

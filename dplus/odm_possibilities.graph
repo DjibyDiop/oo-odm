@@ -1,0 +1,57 @@
+{
+  "schema_version": "dplus_knowledge_graph_v1",
+  "organ": "OdMPossibilityFieldOrgan",
+  "nodes": [
+    {
+      "id": "organ::OdMPossibilityFieldOrgan",
+      "node_type": "Organ",
+      "label": "OdMPossibilityFieldOrgan"
+    },
+    {
+      "id": "signal::OdMPossibilityFieldOrgan::TrajectoryRecordedSignal",
+      "node_type": "Signal",
+      "label": "TrajectoryRecordedSignal",
+      "parent": "organ::OdMPossibilityFieldOrgan"
+    },
+    {
+      "id": "signal::OdMPossibilityFieldOrgan::FieldExpansionSignal",
+      "node_type": "Signal",
+      "label": "FieldExpansionSignal",
+      "parent": "organ::OdMPossibilityFieldOrgan"
+    },
+    {
+      "id": "cell::OdMPossibilityFieldOrgan::field_observer",
+      "node_type": "Cell",
+      "label": "field_observer",
+      "parent": "organ::OdMPossibilityFieldOrgan"
+    },
+    {
+      "id": "receptor::OdMPossibilityFieldOrgan::field_observer::on_trajectory",
+      "node_type": "Receptor",
+      "label": "on_trajectory",
+      "parent": "cell::OdMPossibilityFieldOrgan::field_observer"
+    }
+  ],
+  "edges": [
+    {
+      "from": "organ::OdMPossibilityFieldOrgan",
+      "to": "signal::OdMPossibilityFieldOrgan::TrajectoryRecordedSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMPossibilityFieldOrgan",
+      "to": "signal::OdMPossibilityFieldOrgan::FieldExpansionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMPossibilityFieldOrgan",
+      "to": "cell::OdMPossibilityFieldOrgan::field_observer",
+      "relation": "CONTAINS_CELL"
+    },
+    {
+      "from": "cell::OdMPossibilityFieldOrgan::field_observer",
+      "to": "receptor::OdMPossibilityFieldOrgan::field_observer::on_trajectory",
+      "relation": "DECLARES_RECEPTOR"
+    }
+  ]
+}

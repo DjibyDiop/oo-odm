@@ -1,0 +1,112 @@
+{
+  "schema_version": "dplus_knowledge_graph_v1",
+  "organ": "OdMOntologyOrgan",
+  "nodes": [
+    {
+      "id": "organ::OdMOntologyOrgan",
+      "node_type": "Organ",
+      "label": "OdMOntologyOrgan"
+    },
+    {
+      "id": "signal::OdMOntologyOrgan::LiaisonSignal",
+      "node_type": "Signal",
+      "label": "LiaisonSignal",
+      "parent": "organ::OdMOntologyOrgan"
+    },
+    {
+      "id": "signal::OdMOntologyOrgan::TransformationSignal",
+      "node_type": "Signal",
+      "label": "TransformationSignal",
+      "parent": "organ::OdMOntologyOrgan"
+    },
+    {
+      "id": "signal::OdMOntologyOrgan::DivisionSignal",
+      "node_type": "Signal",
+      "label": "DivisionSignal",
+      "parent": "organ::OdMOntologyOrgan"
+    },
+    {
+      "id": "signal::OdMOntologyOrgan::EmergenceDetectedSignal",
+      "node_type": "Signal",
+      "label": "EmergenceDetectedSignal",
+      "parent": "organ::OdMOntologyOrgan"
+    },
+    {
+      "id": "cell::OdMOntologyOrgan::prototype_bloc",
+      "node_type": "Cell",
+      "label": "prototype_bloc",
+      "parent": "organ::OdMOntologyOrgan"
+    },
+    {
+      "id": "receptor::OdMOntologyOrgan::prototype_bloc::on_liaison",
+      "node_type": "Receptor",
+      "label": "on_liaison",
+      "parent": "cell::OdMOntologyOrgan::prototype_bloc"
+    },
+    {
+      "id": "vascular::Blood",
+      "node_type": "VascularSystem",
+      "label": "Blood"
+    },
+    {
+      "id": "receptor::OdMOntologyOrgan::prototype_bloc::on_transformation",
+      "node_type": "Receptor",
+      "label": "on_transformation",
+      "parent": "cell::OdMOntologyOrgan::prototype_bloc"
+    },
+    {
+      "id": "receptor::OdMOntologyOrgan::prototype_bloc::on_division",
+      "node_type": "Receptor",
+      "label": "on_division",
+      "parent": "cell::OdMOntologyOrgan::prototype_bloc"
+    }
+  ],
+  "edges": [
+    {
+      "from": "organ::OdMOntologyOrgan",
+      "to": "signal::OdMOntologyOrgan::LiaisonSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMOntologyOrgan",
+      "to": "signal::OdMOntologyOrgan::TransformationSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMOntologyOrgan",
+      "to": "signal::OdMOntologyOrgan::DivisionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMOntologyOrgan",
+      "to": "signal::OdMOntologyOrgan::EmergenceDetectedSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMOntologyOrgan",
+      "to": "cell::OdMOntologyOrgan::prototype_bloc",
+      "relation": "CONTAINS_CELL"
+    },
+    {
+      "from": "cell::OdMOntologyOrgan::prototype_bloc",
+      "to": "receptor::OdMOntologyOrgan::prototype_bloc::on_liaison",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMOntologyOrgan::prototype_bloc::on_liaison",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::log()"
+    },
+    {
+      "from": "cell::OdMOntologyOrgan::prototype_bloc",
+      "to": "receptor::OdMOntologyOrgan::prototype_bloc::on_transformation",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "cell::OdMOntologyOrgan::prototype_bloc",
+      "to": "receptor::OdMOntologyOrgan::prototype_bloc::on_division",
+      "relation": "DECLARES_RECEPTOR"
+    }
+  ]
+}

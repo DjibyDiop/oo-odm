@@ -1,0 +1,75 @@
+// =============================================================================
+// OO-ODM: Organique des Matières — Ontologie D+ Natrice (odm_ontology.plus)
+// Spécification formelle des 4 Formes (○, △, □, ★) et des 7 Opérations
+// =============================================================================
+
+organ OdMOntologyOrgan {
+
+    // Signaux d'opérations fondamentales
+    signal LiaisonSignal {
+        source_id: u32,
+        target_id: u32,
+        form_source: u32, // 1: ○ (Cercle), 2: △ (Triangle), 3: □ (Carré), 4: ★ (Étoile)
+        form_target: u32,
+    }
+
+    signal TransformationSignal {
+        bloc_id: u32,
+        energy_change: u32,
+    }
+
+    signal DivisionSignal {
+        parent_id: u32,
+        mode: u32, // 1: Partition, 2: Duplication, 3: Différenciation
+    }
+
+    signal EmergenceDetectedSignal {
+        singularity_id: u32,
+        structural_novelty: bool,
+    }
+
+    // Tissu d'animation et de maintien des Blocs OdM
+    tissue OntologicalTissue {
+
+        genome BlocCell {
+            atp_budget: 1500,
+            hormone_affinity: Adrenaline,
+
+            state {
+                bloc_id: u32 = 1,
+                form_type: u32 = 1, // ○ par défaut
+                energy: u32 = 100,
+                active_liaisons: u32 = 0,
+                is_emergent: bool = false,
+            }
+
+            // Récepteur de Liaison
+            receptor on_liaison(sig: LiaisonSignal) {
+                self.state.active_liaisons += 1;
+                emit Blood::log("OdM Liaison: Nouvelle connexion structurelle établie.");
+            }
+
+            // Récepteur de Transformation
+            receptor on_transformation(sig: TransformationSignal) {
+                self.state.energy += sig.energy_change;
+                if (self.state.energy > 500) {
+                    self.state.form_type = 4; // Étoile ★
+                    self.state.is_emergent = true;
+                    emit Blood::broadcast(EmergenceDetectedSignal {
+                        singularity_id: self.state.bloc_id,
+                        structural_novelty: true,
+                    });
+                }
+            }
+
+            // Récepteur de Division
+            receptor on_division(sig: DivisionSignal) {
+                if (self.state.energy > 50) {
+                    mitosis;
+                }
+            }
+        }
+
+        cell prototype_bloc = spawn BlocCell();
+    }
+}

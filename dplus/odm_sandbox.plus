@@ -1,0 +1,55 @@
+// =============================================================================
+// OO-ODM: Organique des Matières — Constitution & Sandbox Judiciaire (odm_sandbox.plus)
+// Arbitrage constitutionnel des trajectoires exploratoires et budget métabolique
+// =============================================================================
+
+organ OdMSandboxConstitution {
+
+    signal EvaluationRequest {
+        scenario_id: u32,
+        exploration_depth: u32,
+        estimated_atp_cost: u32,
+        is_sandbox: bool,
+    }
+
+    signal ConstitutionalVerdict {
+        scenario_id: u32,
+        verdict_code: u32, // 1: ALLOW, 2: QUARANTINE, 3: FORBID
+        atp_allocated: u32,
+    }
+
+    tissue JudicialTissue {
+
+        genome ConstitutionJudgeCell {
+            atp_budget: 3000,
+            hormone_affinity: Adrenaline,
+
+            state {
+                current_atp_reserve: u32 = 2500,
+                min_safe_reserve: u32 = 500,
+                quarantine_active: bool = false,
+            }
+
+            receptor on_evaluate(req: EvaluationRequest) {
+                // Règle 1: L'exploration doit rester dans la Sandbox
+                if (req.is_sandbox) {
+                    emit Blood::log("Constitution: Exécution confirmée en Sandbox étanche.");
+                }
+
+                // Règle 2: Préservation impérative du pool ATP
+                if (self.state.current_atp_reserve > self.state.min_safe_reserve) {
+                    self.state.current_atp_reserve = self.state.current_atp_reserve - 50;
+                    emit JudicialTissue::broadcast(ConstitutionalVerdict {
+                        scenario_id: req.scenario_id,
+                        verdict_code: 1, // ALLOW
+                        atp_allocated: 50,
+                    });
+                }
+
+                atp_yield;
+            }
+        }
+
+        cell supreme_judge = spawn ConstitutionJudgeCell();
+    }
+}

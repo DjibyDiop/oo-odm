@@ -1,0 +1,192 @@
+// =============================================================================
+// OO-ODM: Organique des Matières — Moteur Cœur Natif D+ (odm_core.plus)
+// Spécification intégrale en D+ : Les 4 Formes (○, △, □, ★) et 7 Opérations
+// RÈGLE FONDATRICE : {code du projet en D+} (plan.md ligne 1)
+// =============================================================================
+
+organ OdMCoreOrgan {
+
+    // --- Signaux des 7 Opérations Fondamentales ---
+    // 1. LIAISON
+    signal LiaisonSignal {
+        source_id: u32,
+        target_id: u32,
+        form_source: u32, // 1: ○ (Cercle), 2: △ (Triangle), 3: □ (Carré), 4: ★ (Étoile)
+        form_target: u32,
+    }
+
+    // 2. RUPTURE
+    signal RuptureSignal {
+        relation_id: u32,
+        source_id: u32,
+        target_id: u32,
+    }
+
+    // 3. TRANSFORMATION
+    signal TransformationSignal {
+        bloc_id: u32,
+        delta_energy: u32,
+        new_form: u32,
+    }
+
+    // 4. COMPOSITION
+    signal CompositionSignal {
+        organisation_id: u32,
+        blocs_count: u32,
+        topology_code: u32,
+    }
+
+    // 5. CONTENIR
+    signal ContenirSignal {
+        container_id: u32,
+        contained_id: u32,
+    }
+
+    // 6. DIVISION
+    signal DivisionSignal {
+        parent_id: u32,
+        mode_code: u32, // 1: Partition, 2: Duplication, 3: Différenciation
+        children_count: u32,
+    }
+
+    // 7. CARACTÉRISATION
+    signal CaracterisationSignal {
+        target_id: u32,
+    }
+
+    // --- Signaux d'Émergence & Dynamique du Champ ---
+    signal EmergenceDiscoverySignal {
+        singularity_id: u32,
+        emergence_type: u32, // 1: NOUVEAU_BLOC, 2: NOUVELLE_ORGANISATION, 3: NOUVELLE_CAPACITE, 4: NOUVELLE_FORME
+        cycle: u32,
+    }
+
+    signal FieldEvolutionSignal {
+        generation: u32,
+        explored_count: u32,
+        open_possibilities: u32,
+        entropy_permille: u32,
+    }
+
+    // =========================================================================
+    // TISSU 1 : ESPACE DE LA MATIÈRE (Exécution des 7 Opérations)
+    // =========================================================================
+    tissue MatterSpaceTissue {
+
+        genome OdMExecutionEngine {
+            atp_budget: 5000,
+            hormone_affinity: Adrenaline,
+
+            state {
+                current_atp_reserve: u32 = 4500,
+                current_generation: u32 = 0,
+                blocs_count: u32 = 3,
+                active_relations: u32 = 0,
+                organisations_count: u32 = 0,
+                emergences_recorded: u32 = 0,
+                is_field_saturated: bool = false,
+            }
+
+            // 1 — LIAISON : Établissement d'une connexion structurelle
+            receptor on_liaison(sig: LiaisonSignal) {
+                if (self.state.current_atp_reserve > 100) {
+                    self.state.current_atp_reserve = self.state.current_atp_reserve - 10;
+                    self.state.active_relations = self.state.active_relations + 1;
+                    emit Blood::log("OdM-Core [D+]: Liaison structurelle établie.");
+                }
+                atp_yield;
+            }
+
+            // 2 — RUPTURE : Clivage d'une relation existante
+            receptor on_rupture(sig: RuptureSignal) {
+                if (self.state.active_relations > 0) {
+                    self.state.active_relations = self.state.active_relations - 1;
+                    emit Blood::log("OdM-Core [D+]: Rupture de liaison effectuée.");
+                }
+                atp_yield;
+            }
+
+            // 3 — TRANSFORMATION : Mutation d'énergie ou d'état d'un bloc
+            receptor on_transformation(sig: TransformationSignal) {
+                if (self.state.current_atp_reserve > 50) {
+                    self.state.current_atp_reserve = self.state.current_atp_reserve - 20;
+                    emit Blood::log("OdM-Core [D+]: Transformation énergétique appliquée.");
+                }
+                atp_yield;
+            }
+
+            // 4 — COMPOSITION : Formation d'une organisation d'ordre supérieur
+            receptor on_composition(sig: CompositionSignal) {
+                self.state.organisations_count = self.state.organisations_count + 1;
+                emit Blood::log("OdM-Core [D+]: Nouvelle organisation composée.");
+                atp_yield;
+            }
+
+            // 5 — CONTENIR : Enregistrement d'une relation d'inclusion
+            receptor on_contenir(sig: ContenirSignal) {
+                emit Blood::log("OdM-Core [D+]: Relation d'inclusion enregistrée.");
+                atp_yield;
+            }
+
+            // 6 — DIVISION : Scission cellulaire et émission d'émergence
+            receptor on_division(sig: DivisionSignal) {
+                self.state.blocs_count = self.state.blocs_count + sig.children_count;
+                self.state.emergences_recorded = self.state.emergences_recorded + 1;
+                emit Blood::broadcast(EmergenceDiscoverySignal {
+                    singularity_id: sig.parent_id,
+                    emergence_type: 1, // NOUVEAU_BLOC
+                    cycle: self.state.current_generation,
+                });
+                mitosis;
+            }
+
+            // 7 — CARACTÉRISATION : Observation pure sans altération
+            receptor on_caracterisation(sig: CaracterisationSignal) {
+                emit Blood::log("OdM-Core [D+]: Caractérisation snapshotée.");
+                atp_yield;
+            }
+        }
+
+        cell odm_engine = spawn OdMExecutionEngine();
+    }
+
+    // =========================================================================
+    // TISSU 2 : DÉCOUVERTE & CLASSIFICATION DES ÉMERGENCES
+    // =========================================================================
+    tissue EmergenceDiscoveryTissue {
+
+        genome EmergenceClassifier {
+            atp_budget: 3000,
+            hormone_affinity: Dopamine,
+
+            state {
+                total_singularities: u32 = 0,
+                new_blocs: u32 = 0,
+                new_organisations: u32 = 0,
+                new_forms: u32 = 0,
+                is_saturated: bool = false,
+            }
+
+            // Enregistrement et classification des singularités ★
+            receptor on_emergence(sig: EmergenceDiscoverySignal) {
+                self.state.total_singularities = self.state.total_singularities + 1;
+                if (sig.emergence_type == 1) {
+                    self.state.new_blocs = self.state.new_blocs + 1;
+                }
+                emit Blood::log("OdM-Découverte [D+]: Singularité classifiée et intégrée.");
+                atp_yield;
+            }
+
+            // Suivi de l'évolution du champ des possibilités
+            receptor on_field_evolve(sig: FieldEvolutionSignal) {
+                if (sig.explored_count > 100) {
+                    self.state.is_saturated = true;
+                    emit Blood::log("OdM-Champ [D+]: Saturation atteinte (>100 trajectoires).");
+                }
+                atp_yield;
+            }
+        }
+
+        cell discovery_watcher = spawn EmergenceClassifier();
+    }
+}

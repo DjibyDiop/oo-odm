@@ -1,0 +1,268 @@
+{
+  "schema_version": "dplus_knowledge_graph_v1",
+  "organ": "OdMCoreOrgan",
+  "nodes": [
+    {
+      "id": "organ::OdMCoreOrgan",
+      "node_type": "Organ",
+      "label": "OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::LiaisonSignal",
+      "node_type": "Signal",
+      "label": "LiaisonSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::RuptureSignal",
+      "node_type": "Signal",
+      "label": "RuptureSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::TransformationSignal",
+      "node_type": "Signal",
+      "label": "TransformationSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::CompositionSignal",
+      "node_type": "Signal",
+      "label": "CompositionSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::ContenirSignal",
+      "node_type": "Signal",
+      "label": "ContenirSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::DivisionSignal",
+      "node_type": "Signal",
+      "label": "DivisionSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::CaracterisationSignal",
+      "node_type": "Signal",
+      "label": "CaracterisationSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::EmergenceDiscoverySignal",
+      "node_type": "Signal",
+      "label": "EmergenceDiscoverySignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "signal::OdMCoreOrgan::FieldEvolutionSignal",
+      "node_type": "Signal",
+      "label": "FieldEvolutionSignal",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "cell::OdMCoreOrgan::odm_engine",
+      "node_type": "Cell",
+      "label": "odm_engine",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_liaison",
+      "node_type": "Receptor",
+      "label": "on_liaison",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_rupture",
+      "node_type": "Receptor",
+      "label": "on_rupture",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_transformation",
+      "node_type": "Receptor",
+      "label": "on_transformation",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_composition",
+      "node_type": "Receptor",
+      "label": "on_composition",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "vascular::Blood",
+      "node_type": "VascularSystem",
+      "label": "Blood"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_contenir",
+      "node_type": "Receptor",
+      "label": "on_contenir",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_division",
+      "node_type": "Receptor",
+      "label": "on_division",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::odm_engine::on_caracterisation",
+      "node_type": "Receptor",
+      "label": "on_caracterisation",
+      "parent": "cell::OdMCoreOrgan::odm_engine"
+    },
+    {
+      "id": "cell::OdMCoreOrgan::discovery_watcher",
+      "node_type": "Cell",
+      "label": "discovery_watcher",
+      "parent": "organ::OdMCoreOrgan"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::discovery_watcher::on_emergence",
+      "node_type": "Receptor",
+      "label": "on_emergence",
+      "parent": "cell::OdMCoreOrgan::discovery_watcher"
+    },
+    {
+      "id": "receptor::OdMCoreOrgan::discovery_watcher::on_field_evolve",
+      "node_type": "Receptor",
+      "label": "on_field_evolve",
+      "parent": "cell::OdMCoreOrgan::discovery_watcher"
+    }
+  ],
+  "edges": [
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::LiaisonSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::RuptureSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::TransformationSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::CompositionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::ContenirSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::DivisionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::CaracterisationSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::EmergenceDiscoverySignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "signal::OdMCoreOrgan::FieldEvolutionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "cell::OdMCoreOrgan::odm_engine",
+      "relation": "CONTAINS_CELL"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_liaison",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_rupture",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_transformation",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_composition",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMCoreOrgan::odm_engine::on_composition",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::log()"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_contenir",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMCoreOrgan::odm_engine::on_contenir",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::log()"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_division",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMCoreOrgan::odm_engine::on_division",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::broadcast()"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::odm_engine",
+      "to": "receptor::OdMCoreOrgan::odm_engine::on_caracterisation",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMCoreOrgan::odm_engine::on_caracterisation",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::log()"
+    },
+    {
+      "from": "organ::OdMCoreOrgan",
+      "to": "cell::OdMCoreOrgan::discovery_watcher",
+      "relation": "CONTAINS_CELL"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::discovery_watcher",
+      "to": "receptor::OdMCoreOrgan::discovery_watcher::on_emergence",
+      "relation": "DECLARES_RECEPTOR"
+    },
+    {
+      "from": "receptor::OdMCoreOrgan::discovery_watcher::on_emergence",
+      "to": "vascular::Blood",
+      "relation": "EMITS_TO_BLOOD",
+      "action": "Blood::Blood::log()"
+    },
+    {
+      "from": "cell::OdMCoreOrgan::discovery_watcher",
+      "to": "receptor::OdMCoreOrgan::discovery_watcher::on_field_evolve",
+      "relation": "DECLARES_RECEPTOR"
+    }
+  ]
+}
