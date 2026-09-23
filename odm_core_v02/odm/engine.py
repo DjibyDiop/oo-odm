@@ -459,3 +459,16 @@ class OdMCore:
         poss["COMPOSITION_possible"] = len(self.elements) >= 2
 
         return poss
+
+    @property
+    def cycle(self) -> int:
+        return self._time
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Exporte l'état complet du système sous forme sérialisable."""
+        return {
+            "elements": {eid: e.snapshot() for eid, e in self.elements.items()},
+            "relations": [f"{r.source}_{r.target}" for r in self.relations.values() if r.active],
+            "organisations": [o.id for o in self.organisations.values()],
+            "time": self._time
+        }

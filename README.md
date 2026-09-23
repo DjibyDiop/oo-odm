@@ -55,16 +55,17 @@ oo-odm/
 │   ├── odm_core.plus         # Les 7 opérations fondamentales en D+ pur
 │   ├── odm_ontology.plus     # Ontologie des 4 formes (○ △ □ ★)
 │   ├── odm_sandbox.plus      # Constitution & Arbitrage (D+ Judge)
-│   └── odm_possibilities.plus# Champ des possibilités & trajectoires
-├── odm_core_v02/     # Expériences OdM (EXP-001 → EXP-006)
-└── test_all_odm.py   # Runner unifié — 16/16 suites (Zero Mocks)
+│   ├── odm_possibilities.plus# Champ des possibilités & trajectoires
+│   └── odm_grammar.plus      # Grammaire formelle, transitions S_t -> S_{t+1}, résultat Q
+├── odm_core_v02/     # Expériences OdM (EXP-001 → EXP-006) & Grammaire formelle
+└── test_all_odm.py   # Runner unifié — 17/17 suites (Zero Mocks)
 ```
 
 ### Moteurs Natifs (Zéro Mocks)
 
 | Moteur | Technologie | Rôle |
 |---|---|---|
-| **O-D+** | D+ (dpc.exe) | Arbitrage constitutionnel, ontologie, opérations |
+| **O-D+** | D+ (dpc.exe) | Arbitrage constitutionnel, ontologie, opérations, grammaire |
 | **O-CPP** | C++ SIMD | Expansion combinatoire HPC (512 trajectoires) |
 | **O-RUST** | Rust | IPC strict, frames JSON natifs |
 | **O-PY** | Python | Entropie de Shannon, heuristiques topologiques |
@@ -76,7 +77,7 @@ oo-odm/
 ```
 OO-ODM UNIFIED SOVEREIGN TEST SUITE
 ==================================================
-RESULTS: 16 / 16 suites passed (100%)
+RESULTS: 17 / 17 suites passed (100%)
 ==================================================
 ```
 
@@ -88,6 +89,7 @@ RESULTS: 16 / 16 suites passed (100%)
 | EXP-004 | Boucle fermée OO ↔ OdM | ✅ |
 | EXP-005 | Organisme de Possibilités (6 compartiments, H=2.591 bits) | ✅ |
 | **EXP-006** | **Moteur Cœur D+ Natif — Les 7 Opérations bout-en-bout** | ✅ |
+| **Phase 5** | **Grammaire Opérationnelle Formelle, Lois de la Matière & Métrologie** | ✅ |
 
 ---
 

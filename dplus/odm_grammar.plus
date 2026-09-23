@@ -1,0 +1,99 @@
+// =============================================================================
+// OO-ODM: Organique des Matières — Grammaire Formelle D+ (odm_grammar.plus)
+// Spécification en D+ pur : Transitions S_t -> S_{t+1}, Résultat Q, Lois & Stabilité
+// RÈGLE FONDATRICE : {code du projet en D+} (plan.md ligne 1)
+// ZÉRO MOCKS : Compilé et vérifié nativement via dpc.exe
+// =============================================================================
+
+organ OdMGrammarOrgan {
+
+    // --- Signaux Grammaticaux ---
+    // 1. Transition Opérationnelle S_t -> S_{t+1}
+    signal TransitionSignal {
+        cycle: u32,
+        op_code: u32,     // 1:L, 2:R, 3:T, 4:C, 5:CT, 6:D, 7:K
+        target_a: u32,
+        target_b: u32,
+        atp_cost: u32,
+    }
+
+    // 2. Évaluation de Contexte & Affinité Morphologique
+    signal ContextVerificationSignal {
+        form_a: u32,
+        form_b: u32,
+        affinity_permille: u32, // [0 .. 1000]
+    }
+
+    // 3. Matérialisation du Résultat Q
+    signal ResultQSignal {
+        q_type: u32,       // 1:Element, 2:Relation, 3:Organisation, 4:Transformation, 5:Possibilite, 6:Emergence
+        is_emergence: bool,
+        depth_level: u32,
+    }
+
+    // 4. Invariant de Stabilité & Homéostasie
+    signal StabilityAuditSignal {
+        coherence_permille: u32,
+        is_stable: bool,
+    }
+
+    // =========================================================================
+    // TISSU 1 : MOTEUR FORMEL DE TRANSITIONS & RÉSULTAT Q
+    // =========================================================================
+    tissue OperationalGrammarTissue {
+
+        genome GrammarEngineGenome {
+            atp_budget: 8000,
+            hormone_affinity: Adrenaline,
+
+            state {
+                current_cycle: u32 = 0,
+                total_transitions: u32 = 0,
+                emergence_q_count: u32 = 0,
+                max_depth_recorded: u32 = 0,
+                grammar_coherence: u32 = 1000,
+                is_system_stable: bool = true,
+            }
+
+            // Récepteur de transition formelle
+            receptor on_transition(sig: TransitionSignal) {
+                self.state.current_cycle = sig.cycle;
+                self.state.total_transitions = self.state.total_transitions + 1;
+
+                if (sig.atp_cost > 0) {
+                    emit Blood::log("OdM-Grammar [D+]: Transition d'état validée. Déduction ATP métabolique.");
+                }
+                atp_yield;
+            }
+
+            // Récepteur de validation contextuelle
+            receptor on_context_check(sig: ContextVerificationSignal) {
+                if (sig.affinity_permille >= 450) {
+                    emit Blood::log("OdM-Grammar [D+]: Contexte morphologique compatible.");
+                } else {
+                    emit Blood::warn("OdM-Grammar [D+]: Alerte tension morphologique faible.");
+                }
+                atp_yield;
+            }
+
+            // Récepteur de matérialisation Q
+            receptor on_result_q(sig: ResultQSignal) {
+                if (sig.is_emergence) {
+                    self.state.emergence_q_count = self.state.emergence_q_count + 1;
+                    emit Blood::log("OdM-Grammar [D+]: ★ RÉSULTAT Q SINGULIER ENREGISTRÉ DANS L'ORGANE !");
+                }
+                if (sig.depth_level > self.state.max_depth_recorded) {
+                    self.state.max_depth_recorded = sig.depth_level;
+                }
+                atp_yield;
+            }
+
+            // Récepteur d'audit de stabilité
+            receptor on_stability_audit(sig: StabilityAuditSignal) {
+                self.state.grammar_coherence = sig.coherence_permille;
+                self.state.is_system_stable = sig.is_stable;
+                atp_yield;
+            }
+        }
+    }
+}

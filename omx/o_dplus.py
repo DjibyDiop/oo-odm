@@ -31,19 +31,23 @@ class ODPlusEngine:
         self.core_path = os.path.join(dplus_dir, "odm_core.plus")
         self.core_graph = os.path.join(dplus_dir, "odm_core.graph")
 
+        self.grammar_path = os.path.join(dplus_dir, "odm_grammar.plus")
+        self.grammar_graph = os.path.join(dplus_dir, "odm_grammar.graph")
+
         # Validation de l'environnement D+
         if not os.path.exists(self.dpc_bin):
             raise FileNotFoundError(f"[O-D+ FATAL] Compilateur D+ introuvable : {self.dpc_bin}")
         if not os.path.exists(self.sandbox_path):
             raise FileNotFoundError(f"[O-D+ FATAL] Politique D+ Sandbox introuvable : {self.sandbox_path}")
 
-        # Compilation/Validation des 4 graphes
+        # Compilation/Validation des 5 graphes
         self._ensure_graph(self.sandbox_path, self.sandbox_graph)
         self._ensure_graph(self.ontology_path, self.ontology_graph)
         self._ensure_graph(self.possibilities_path, self.possibilities_graph)
         self._ensure_graph(self.core_path, self.core_graph)
+        self._ensure_graph(self.grammar_path, self.grammar_graph)
 
-        print("[O-D+] Moteur d'Orchestration et Règles D+ chargé (Chaîne native active, 4 organes).")
+        print("[O-D+] Moteur d'Orchestration et Règles D+ chargé (Chaîne native active, 5 organes).")
 
     def _ensure_graph(self, src_path: str, graph_path: str):
         """Recompile avec dpc.exe si le graphe sémantique OPI est absent."""
@@ -186,6 +190,26 @@ class ODPlusEngine:
                 "atp_spent": cost,
                 "is_emergence": operation == "DIVISION",
                 "organ": "OdMCoreOrgan"
+            }
+
+        # --- 5. VALIDATION GRAMMAIRE OPÉRATIONNELLE FORMELLE (odm_grammar.plus) ---
+        if instruction.op_type == OIRType.VALIDATE_GRAMMAR:
+            self._ensure_graph(self.grammar_path, self.grammar_graph)
+            with open(self.grammar_graph, "r", encoding="utf-8") as f:
+                graph_data = json.load(f)
+
+            nodes = [n["label"] for n in graph_data.get("nodes", [])]
+            required_signals = [
+                "TransitionSignal", "ContextVerificationSignal",
+                "ResultQSignal", "StabilityAuditSignal"
+            ]
+            valid = all(s in nodes for s in required_signals)
+            return {
+                "status": "GRAMMAR_VALIDATED" if valid else "GRAMMAR_INCOMPLETE",
+                "organ": "OdMGrammarOrgan",
+                "signals_checked": required_signals,
+                "graph_nodes_count": len(nodes),
+                "is_biologically_coherent": valid
             }
 
         return {"status": "ignored"}

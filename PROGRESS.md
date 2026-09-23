@@ -1,6 +1,6 @@
 # OO-ODM — Development Progress & Certification
 
-## Status: 16/16 COMPLETE & CERTIFIED (Zero Mocks)
+## Status: 17/17 COMPLETE & CERTIFIED (Zero Mocks)
 
 | Phase | Composant | Statut | Implémentation | Vérification |
 | :--- | :--- | :---: | :--- | :--- |
@@ -20,18 +20,21 @@
 | **Phase 3** | EXP-004 Boucle Fermée OO↔OdM | ✅ | `odm_core_v02/experiments/experiment_004.py` | `test_experiment_004` |
 | **Phase 4** | EXP-005 Organisme de Possibilités | ✅ | `odm_core_v02/experiments/experiment_005.py` | `test_experiment_005` |
 | **Phase 4 — Option 2** | EXP-006 Moteur Cœur D+ Natif (7 Ops) | ✅ | `odm_core_v02/test_odm_dplus_core.py` | `test_odm_dplus_core` |
+| **Phase 5** | Grammaire Opérationnelle & Métrologie | ✅ | `odm_core_v02/odm/grammar.py, laws.py, metrics.py` | `test_odm_formal_grammar` |
 
 ---
 
 ## Zero-Mocks Compliance Audit
 
-- **4 Organes D+ compilés nativement** : `odm_sandbox.plus`, `odm_ontology.plus`, `odm_possibilities.plus`, `odm_core.plus` via `dpc.exe`
+- **5 Organes D+ compilés nativement** : `odm_sandbox.plus`, `odm_ontology.plus`, `odm_possibilities.plus`, `odm_core.plus`, `odm_grammar.plus` via `dpc.exe`
+- **Table normative des 7 opérations fondamentales** : $L, R, T, C, CT, D, K$ avec transitions formelles $S_t \xrightarrow{OP} S_{t+1}$
+- **Typage formel du Résultat $Q$** : $Q \in \{E, R, O, T, \Pi, \star\}$ avec détection de singularités non-linéaires
+- **Système axiomatique de Lois de la matière** : Conservation ATP/énergie, Affinité morphologique symétrique, Invariants de stabilité
+- **Métrologie Organique** : Profondeur phylogénétique, Distance topologique $D(S_A, S_B)$, Entropie de Shannon
 - **Moteur SIMD HPC C++ natif** : `ocpp_engine.exe` — expansion combinatoire jusqu'à 512 trajectoires
 - **Moteur Python IA/Informationnel** : entropie de Shannon `H=2.591 bits` via `OPyEngine`
 - **Moteur Rust natif** : `oir-rust.exe` IPC strict JSON frames
-- **Modèles Canoniques Fondateurs** : Absorption, Épreuve du Vide, Transition de phase de la cire
-- **Organisme de Possibilités** : 6 compartiments actifs (existant, possibles, exploré, émergences ★, interdits, inexploré)
-- **Test Runner Unifié** : `test_all_odm.py` — **16/16 suites, 100%, Zéro Mocks**
+- **Test Runner Unifié** : `test_all_odm.py` — **17/17 suites, 100%, Zéro Mocks**
 
 ---
 
@@ -43,11 +46,11 @@
 - Les 4 Formes (○ △ □ ★) et 7 Opérations en D+ pur
 - Organisme de Possibilités (EXP-005)
 - Moteur Cœur D+ Natif bout-en-bout (EXP-006)
+- Grammaire opérationnelle formelle (règles avant/après, contexte, résultat `Q`)
+- Système de lois, conditions et stabilité
+- Mesure organique (profondeur, distance, richesse d'émergence)
 
 ### 🔲 À construire
-- [ ] Grammaire opérationnelle formelle (règles avant/après, contexte, résultat `Q`)
-- [ ] Système de lois, conditions et stabilité
-- [ ] Mesure organique (profondeur, distance, richesse d'émergence)
 - [ ] Langage de surface OdM (syntaxe déclarative au-dessus de D+)
 - [ ] Protocole d'adoption de connaissance OdM → OO (bidirectionnel)
 - [ ] Publication preprint (arXiv)

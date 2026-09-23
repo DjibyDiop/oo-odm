@@ -37,6 +37,8 @@ def run_all_odm_tests():
         ("OdM Expérience 005 (Organisme de Possibilités)", "odm_core_v02.test_experiment_005", "test_experiment_005"),
         # --- Phase 4 — Option 2 : Moteur OdM Intégral en pur D+ ---
         ("OdM Expérience 006 (Moteur Cœur D+ Natif — 7 Ops)", "odm_core_v02.test_odm_dplus_core", "test_odm_dplus_core"),
+        # --- Phase 5 : Grammaire Opérationnelle Formelle & Métrologie ---
+        ("OdM Grammaire Opérationnelle Formelle & Métrologie", "odm_core_v02.test_odm_formal_grammar", "test_formal_grammar"),
     ]
 
 

@@ -1,0 +1,57 @@
+{
+  "schema_version": "dplus_knowledge_graph_v1",
+  "organ": "OdMGrammarOrgan",
+  "nodes": [
+    {
+      "id": "organ::OdMGrammarOrgan",
+      "node_type": "Organ",
+      "label": "OdMGrammarOrgan"
+    },
+    {
+      "id": "signal::OdMGrammarOrgan::TransitionSignal",
+      "node_type": "Signal",
+      "label": "TransitionSignal",
+      "parent": "organ::OdMGrammarOrgan"
+    },
+    {
+      "id": "signal::OdMGrammarOrgan::ContextVerificationSignal",
+      "node_type": "Signal",
+      "label": "ContextVerificationSignal",
+      "parent": "organ::OdMGrammarOrgan"
+    },
+    {
+      "id": "signal::OdMGrammarOrgan::ResultQSignal",
+      "node_type": "Signal",
+      "label": "ResultQSignal",
+      "parent": "organ::OdMGrammarOrgan"
+    },
+    {
+      "id": "signal::OdMGrammarOrgan::StabilityAuditSignal",
+      "node_type": "Signal",
+      "label": "StabilityAuditSignal",
+      "parent": "organ::OdMGrammarOrgan"
+    }
+  ],
+  "edges": [
+    {
+      "from": "organ::OdMGrammarOrgan",
+      "to": "signal::OdMGrammarOrgan::TransitionSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMGrammarOrgan",
+      "to": "signal::OdMGrammarOrgan::ContextVerificationSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMGrammarOrgan",
+      "to": "signal::OdMGrammarOrgan::ResultQSignal",
+      "relation": "DECLARES_SIGNAL"
+    },
+    {
+      "from": "organ::OdMGrammarOrgan",
+      "to": "signal::OdMGrammarOrgan::StabilityAuditSignal",
+      "relation": "DECLARES_SIGNAL"
+    }
+  ]
+}
