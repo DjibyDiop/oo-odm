@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Minimalist_logo_design_for_OdM_2K_20260923193914.jpeg" alt="OO-OdM Logo" width="220" style="border-radius: 16px;" />
+</p>
+
 # OO-OdM — Organique des Matières
 ### *A Science of Matter Before All Sciences*
 
